@@ -25,7 +25,6 @@ public final class Core implements CoreServer{
     private CoreServerListener listener;
     @Getter
     private CorePlayerManager playerManager;
-    @Getter
     private EventManager eventManager;
     private CoreForge coreForge;
     @Getter
@@ -75,7 +74,7 @@ public final class Core implements CoreServer{
 
     @Override
     public CorePlayer[] getOnlinePlayers() {
-        return new CorePlayer[0];
+        return this.playerManager.getOnlinePlayers();
     }
 
     @Override
@@ -85,6 +84,6 @@ public final class Core implements CoreServer{
 
     @Override
     public CoreEventManager getEventManager() {
-        return null;
+        return this.eventManager;
     }
 }

@@ -26,6 +26,8 @@ public interface CorePlayer extends CorePublicPlayer{
 
     CoreForgePlayerMP getCoreForgePlayerMP();
 
+    String locationToString();
+
 
 
 

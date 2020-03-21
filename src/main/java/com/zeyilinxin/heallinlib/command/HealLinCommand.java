@@ -1,5 +1,6 @@
 package com.zeyilinxin.heallinlib.command;
 
+import com.heallin.api.bukkit.CoreBukkit;
 import com.zeyilinxin.heallinlib.command.annotation.HCD;
 import com.zeyilinxin.heallinlib.command.type.CommandType;
 import com.zeyilinxin.heallinlib.plugin.HealLinPlugin;
@@ -50,6 +51,18 @@ public class HealLinCommand<T> implements CommandExecutor {
                     if (this.isType(h.type() , sender)){
                         String per = this.hasPermission(h.permission() , sender);
                         if (per.isEmpty()){
+                            if (h.type().length == 1 && h.type()[0] == CommandType.CorePlayer){
+                                try {
+                                    Player player = (Player) sender;
+                                    this.cmdMap.get(h).invoke(this.cmd , CoreBukkit.getCorePlayer(player), args);
+                                    return true;
+                                } catch (IllegalAccessException e) {
+                                    e.printStackTrace();
+                                } catch (InvocationTargetException e) {
+                                    e.printStackTrace();
+                                }
+                                return true;
+                            }
                             try {
                                 this.cmdMap.get(h).invoke(this.cmd , sender , args);
                                 return true;

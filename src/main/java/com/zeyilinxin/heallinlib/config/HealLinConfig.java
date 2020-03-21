@@ -112,13 +112,14 @@ public class HealLinConfig {
         return null;
     }
 
+    @Deprecated
     public static <T> void iniHGC(String path , FileConfiguration fileConfig , T config , String needTitle){
         if (!path.isEmpty()){
             path = path + ".";
         }
         Field[] fields = config.getClass().getDeclaredFields();
         try {
-            config.getClass().getDeclaredField(needTitle).set(config , getConfig( path + needTitle , fileConfig , config.getClass().getDeclaredField(needTitle).getType() , false , ""));
+            config.getClass().getDeclaredField(needTitle).set(config , getConfig( path + needTitle , fileConfig , config.getClass().getDeclaredField(needTitle).getType() , false , "" , true));
             String title = (String) config.getClass().getDeclaredField(needTitle).get(config);
             for (Field f : fields){
                 f.setAccessible(true);
@@ -128,7 +129,7 @@ public class HealLinConfig {
                 }
                 if (f.isAnnotationPresent(HGC.class)){
                     HGC hgc = f.getAnnotation(HGC.class);
-                    f.set(config, getConfig(path  + fieldName, fileConfig , f.getType() , hgc.title() , title));
+                    f.set(config, getConfig(path  + fieldName, fileConfig , f.getType() , hgc.title() , title , true));
                 }
             }
 
@@ -136,6 +137,35 @@ public class HealLinConfig {
             e.printStackTrace();
         }
     }
+
+    public static <T> void iniHGC(String path , FileConfiguration fileConfig , T config , String needTitle , boolean useTitle , boolean replace){
+        if (!path.isEmpty()){
+            path = path + ".";
+        }
+        Field[] fields = config.getClass().getDeclaredFields();
+        try {
+            String title = "";
+            if (useTitle){
+                config.getClass().getDeclaredField(needTitle).set(config , getConfig( path + needTitle , fileConfig , config.getClass().getDeclaredField(needTitle).getType() , false , "" , true));
+                title = (String) config.getClass().getDeclaredField(needTitle).get(config);
+            }
+            for (Field f : fields){
+                f.setAccessible(true);
+                String fieldName = f.getName();
+                if (fieldName.equalsIgnoreCase(needTitle)){
+                    continue;
+                }
+                if (f.isAnnotationPresent(HGC.class)){
+                    HGC hgc = f.getAnnotation(HGC.class);
+                    f.set(config, getConfig(path  + fieldName, fileConfig , f.getType() , hgc.title() , title , replace));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static <T> String getTitle(T config , String title){
         try {
@@ -149,12 +179,18 @@ public class HealLinConfig {
         return "";
     }
 
-    private static Object getConfig(String path , FileConfiguration config , Class type , boolean isTitle , String title){
+    private static Object getConfig(String path , FileConfiguration config , Class type , boolean isTitle , String title , boolean replace){
         if (type.equals(String.class)){
             if (isTitle){
-                return title + config.getString(path , "").replace("&" , "§");
+                if (replace){
+                    return title + config.getString(path , "").replace("&" , "§");
+                }
+                return title + config.getString(path , "");
             }
-            return config.getString(path , "").replace("&" , "§");
+            if (replace){
+                return config.getString(path , "").replace("&" , "§");
+            }
+            return config.getString(path , "");
         }else if (type.equals(int.class)){
             return config.getInt(path , 0);
         }else if (type.equals(boolean.class)){

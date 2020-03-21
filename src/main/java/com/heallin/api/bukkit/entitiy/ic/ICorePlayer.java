@@ -49,6 +49,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
         }
     }
 
+    @Override
     public void send(Packet<?> packet){
         this.playerConnection.sendPacket(packet);
     }
@@ -87,6 +88,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
 
     }
 
+    @Override
     public Player getPlayer() {
         return player;
     }
@@ -114,6 +116,11 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
     @Override
     public CoreForgePlayerMP getCoreForgePlayerMP() {
         return this.playerMP;
+    }
+
+    @Override
+    public String locationToString() {
+        return null;
     }
 
 
