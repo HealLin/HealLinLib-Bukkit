@@ -8,6 +8,7 @@ package com.zeyilinxin.heallinlib.chat;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatMessage {
     private int point;
@@ -47,6 +48,10 @@ public class ChatMessage {
         this.json = "{\"extra\":[" + a.toString() + "],\"text\":\"\"}";
         return this;
     }
+
+
+
+
 
 
     public IChatBaseComponent getText(){

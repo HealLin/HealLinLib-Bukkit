@@ -3,6 +3,7 @@ package com.zeyilinxin.heallinlib.api.utils;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 public class ArrayListUtils {
@@ -20,6 +21,43 @@ public class ArrayListUtils {
         }
         return cls;
 
+    }
+
+    List<String> filter(String data , List<String> list){
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (String l : list){
+            if (data.indexOf(l) != -1){
+                arrayList.add(l);
+            }
+        }
+        return arrayList;
+    }
+
+
+    public List<String> handler(String data , List<String> list){
+        this.filter(data , list);
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0 ; i < list.size() ; i++){
+            String l = list.get(i);
+            if (i == 0){
+                arrayList.add(data.substring(0 , data.indexOf(l)));
+            }
+            if (i == list.size() -1){
+                arrayList.add(data.substring(data.lastIndexOf(l) + l.length()));
+                continue;
+            }
+            arrayList.add(data.substring(data.indexOf(l) + l.length() , data.indexOf(list.get(i+1))));
+        }
+        return arrayList;
+    }
+
+
+    public static <T> List<T> handleReplace(List<T> list , RunReplace runReplace){
+        ArrayList<T> arrayList = new ArrayList<>();
+        for (T t : list){
+            arrayList.add(runReplace.run(t));
+        }
+        return arrayList;
     }
 
     public static <T> T[] listToArray(Collection<T> collection , Class cls){

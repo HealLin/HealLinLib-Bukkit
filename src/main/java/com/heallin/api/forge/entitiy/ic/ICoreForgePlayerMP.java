@@ -1,17 +1,16 @@
 package com.heallin.api.forge.entitiy.ic;
 
-import com.heallin.api.bukkit.entitiy.CoreInventory;
 import com.heallin.api.bukkit.entitiy.ic.ICorePlayer;
 import com.heallin.api.forge.entitiy.CoreForgePlayerMP;
-import lombok.Getter;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.v1_12_R1.EntityPlayer;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;
-import net.minecraft.server.v1_12_R1.Packet;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.UUID;
 
 public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
@@ -62,6 +61,27 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
     @Override
     public EntityPlayerMP getEntityPlayerMP() {
         return this.playerMP;
+    }
+
+
+    @Override
+    public void sendAll(Object object) {
+
+    }
+
+    @Override
+    public UUID getUUID() {
+        return this.playerMP.func_110124_au();
+    }
+
+    @Override
+    public World getWorld() {
+        return this.playerMP.field_70170_p;
+    }
+
+    @Override
+    public WorldServer getWorldServer() {
+        return (WorldServer) this.getWorld();
     }
 
     /*@Override

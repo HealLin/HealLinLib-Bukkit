@@ -6,6 +6,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.bukkit.entity.Player;
 
+@Deprecated
 public class HealLinForge {
 
     public static HealLinForge forge;

@@ -1,5 +1,7 @@
 package com.zeyilinxin.heallinlib.mod.pokemon;
 
+import com.heallin.api.bukkit.CoreBukkit;
+import com.heallin.api.bukkit.entitiy.CorePlayer;
 import com.pixelmonmod.pixelmon.Pixelmon;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.battles.rules.BattleRules;
@@ -25,12 +27,22 @@ public class PokemonApi {
         return null;
     }
 
+    @Deprecated
     public static PlayerPartyStorage getPlayerPartyStorage(Player player){
         return Pixelmon.storageManager.getParty(player.getUniqueId());
     }
 
+    public static PlayerPartyStorage getPlayerPartyStorage(CorePlayer corePlayer){
+        return getPlayerPartyStorage(corePlayer.getPlayer());
+    }
+
+    public static void replacePokemonSkill(UUID pokemonUUID , int attackId , CorePlayer player){
+        Pixelmon.network.sendTo(new OpenReplaceMoveScreen(pokemonUUID , attackId) , player.getEntityPlayerMP());
+    }
+
+    @Deprecated
     public static void replacePokemonSkill(UUID pokemonUUID , int attackId , Player player){
-        Pixelmon.network.sendTo(new OpenReplaceMoveScreen(pokemonUUID, attackId), HealLinForge.getEntityPlayerMP(player));
+        replacePokemonSkill(pokemonUUID , attackId , CoreBukkit.getCorePlayer(player));
     }
 
     public static ItemStack getPhoto(Pokemon pokemon){

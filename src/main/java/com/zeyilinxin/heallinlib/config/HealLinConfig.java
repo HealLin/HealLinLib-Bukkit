@@ -38,6 +38,10 @@ public class HealLinConfig {
         this.configuration = YamlConfiguration.loadConfiguration(this.file);
     }
 
+    public void copyFile(String path , boolean replace){
+        saveResource(path , replace);
+    }
+
 
     public void save(){
         try {

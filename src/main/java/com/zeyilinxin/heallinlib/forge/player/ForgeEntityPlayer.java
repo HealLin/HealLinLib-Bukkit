@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@Deprecated
 public class ForgeEntityPlayer {
 
     private EntityPlayerMP entityPlayerMP;

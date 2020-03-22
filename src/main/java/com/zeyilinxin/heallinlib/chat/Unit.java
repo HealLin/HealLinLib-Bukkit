@@ -7,7 +7,7 @@ public class Unit
     private HoverEvent hoverEvent;
     private ClickEvent clickEvent;
 
-    Unit(final String message) {
+    protected Unit(final String message) {
         this.displayMessage = message;
         this.hoverEvent = null;
         this.clickEvent = null;

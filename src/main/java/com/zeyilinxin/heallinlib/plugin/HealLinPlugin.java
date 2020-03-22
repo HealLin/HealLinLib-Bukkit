@@ -1,5 +1,6 @@
 package com.zeyilinxin.heallinlib.plugin;
 
+import com.heallin.api.bukkit.CoreBukkit;
 import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.command.CommandHelp;
 import com.zeyilinxin.heallinlib.command.HealLinCommand;
@@ -69,8 +70,9 @@ public abstract class HealLinPlugin extends JavaPlugin {
         this.getCommand(main).setExecutor(healLinCommand);
     }
 
+    @Deprecated
     public EntityPlayerMP getEntityPlayerMP(Player player){
-        return this.getServerPlugin().getHealLinForge().getMinecraftServer().func_184103_al().func_177451_a(player.getUniqueId());
+        return CoreBukkit.getCorePlayer(player).getEntityPlayerMP();
     }
 
     public void registerEvents(Listener listener){
@@ -79,6 +81,10 @@ public abstract class HealLinPlugin extends JavaPlugin {
 
     public Storage getStorage(String url , String[] args){
         return HealLinStorage.getStorage(this , url , args);
+    }
+
+    protected void copyFile(String path , boolean replace){
+        this.serverPlugin.getHealLinConfig().saveResource(path , replace);
     }
 
     @Deprecated

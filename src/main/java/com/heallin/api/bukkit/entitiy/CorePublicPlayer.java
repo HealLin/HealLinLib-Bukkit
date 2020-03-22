@@ -5,6 +5,8 @@ import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public interface CorePublicPlayer {
 
     void sendMessage(IChatBaseComponent... baseComponents);
@@ -20,4 +22,8 @@ public interface CorePublicPlayer {
     String getName();
 
     EntityPlayerMP getEntityPlayerMP();
+
+    void sendAll(Object object);
+
+    UUID getUUID();
 }

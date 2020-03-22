@@ -5,16 +5,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.v1_12_R1.EntityPlayer;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 import net.minecraft.server.v1_12_R1.Packet;
+import org.bukkit.World;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public interface CorePlayer extends CorePublicPlayer{
 
     void send(Packet<?> packet);
-
-
-
-
 
     CoreInventory getCoreInventory();
 
@@ -27,6 +24,8 @@ public interface CorePlayer extends CorePublicPlayer{
     CoreForgePlayerMP getCoreForgePlayerMP();
 
     String locationToString();
+
+    World getWorld();
 
 
 

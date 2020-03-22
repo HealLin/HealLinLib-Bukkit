@@ -4,6 +4,7 @@ import com.zeyilinxin.heallinlib.sponge.config.SpongeConfig;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
+@Deprecated
 public abstract class SpongePlugin {
 
     private SpongeConfig spongeConfig;

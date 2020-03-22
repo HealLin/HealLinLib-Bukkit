@@ -54,6 +54,7 @@ public class ServerPlugin {
         return healLinPlugin;
     }
 
+    @Deprecated
     public Player getPlayer(EntityPlayerMP playerMP){
         return Bukkit.getPlayer(playerMP.func_110124_au());
     }

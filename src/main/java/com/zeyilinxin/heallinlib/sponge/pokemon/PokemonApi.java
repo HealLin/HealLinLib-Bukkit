@@ -9,6 +9,7 @@ import org.spongepowered.api.entity.living.player.Player;
 
 import java.util.UUID;
 
+@Deprecated
 public class PokemonApi {
 
     public static PlayerPartyStorage getPlayerPartyStorage(Player player){

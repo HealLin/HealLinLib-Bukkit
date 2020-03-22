@@ -7,7 +7,7 @@ public class HoverEvent
     private HoverAction action;
     private ArrayList<String> value;
 
-    HoverEvent(final HoverAction action, final ArrayList<String> value) {
+    protected HoverEvent(final HoverAction action, final ArrayList<String> value) {
         this.action = action;
         this.value = value;
     }

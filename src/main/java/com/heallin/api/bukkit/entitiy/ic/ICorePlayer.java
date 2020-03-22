@@ -1,9 +1,10 @@
 package com.heallin.api.bukkit.entitiy.ic;
 
-import com.heallin.api.bukkit.version.MinecraftBukkitApi;
-import com.heallin.api.bukkit.entitiy.CoreInventory;
 import com.heallin.api.bukkit.Core;
+import com.heallin.api.bukkit.CoreBukkit;
+import com.heallin.api.bukkit.entitiy.CoreInventory;
 import com.heallin.api.bukkit.entitiy.CorePlayer;
+import com.heallin.api.bukkit.version.MinecraftBukkitApi;
 import com.heallin.api.forge.entitiy.CoreForgePlayerMP;
 import com.heallin.api.forge.entitiy.ic.ICoreForgePlayerMP;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
     private ICoreInventory inventory;
     @Getter
     private ICoreForgePlayerMP playerMP;
+    private World world;
 
 
     public ICorePlayer(Core core, Player player) {
@@ -47,6 +49,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
         if (this.core.isForge()){
             this.playerMP = new ICoreForgePlayerMP(this);
         }
+        this.world = this.entityPlayer.world;
     }
 
     @Override
@@ -96,6 +99,18 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
     @Override
     public EntityPlayerMP getEntityPlayerMP() {
         return this.playerMP.getEntityPlayerMP();
+    }
+
+    @Override
+    public org.bukkit.World getWorld() {
+        return this.world.getWorld();
+    }
+
+    @Override
+    public void sendAll(Object packet) {
+        for (CorePlayer p : CoreBukkit.getOnlinePlayers()){
+            p.send((Packet<?>) packet);
+        }
     }
 
     @Override

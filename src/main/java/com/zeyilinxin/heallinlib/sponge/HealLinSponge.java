@@ -2,6 +2,7 @@ package com.zeyilinxin.heallinlib.sponge;
 
 import com.zeyilinxin.heallinlib.sponge.plugin.SpongePlugin;
 
+@Deprecated
 public class HealLinSponge {
 
     private static HealLinSponge healLinSponge;
