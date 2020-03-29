@@ -23,11 +23,11 @@ public class ForgeEntityPlayer {
     }
 
     public World getWorld(){
-        return entityPlayerMP.func_130014_f_();
+        return entityPlayerMP.getServerWorld();
     }
 
     public UUID getUUID(){
-        return this.entityPlayerMP.func_110124_au();
+        return this.entityPlayerMP.getUniqueID();
     }
 
     public WorldServer getWorldServer(){

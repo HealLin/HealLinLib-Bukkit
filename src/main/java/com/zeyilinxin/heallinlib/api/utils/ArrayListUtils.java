@@ -23,6 +23,22 @@ public class ArrayListUtils {
 
     }
 
+    public static <T> T[] fromSmallToLarge(T[] cls , FSTL<T> sfl){
+        for (T l : cls){
+            for(int i = 0 ; i < cls.length - 1 ; i++){
+                T temp;
+                if (sfl.run(cls , i)){
+                    temp = cls[i];
+                    cls[i] = cls[i+1];
+                    cls[i+1]= temp;
+                }
+            }
+        }
+        return cls;
+
+    }
+
+
     List<String> filter(String data , List<String> list){
         ArrayList<String> arrayList = new ArrayList<>();
         for (String l : list){
@@ -35,7 +51,7 @@ public class ArrayListUtils {
 
 
     public List<String> handler(String data , List<String> list){
-        this.filter(data , list);
+        list = filter(data , list);
         ArrayList<String> arrayList = new ArrayList<>();
         for (int i = 0 ; i < list.size() ; i++){
             String l = list.get(i);
@@ -55,7 +71,7 @@ public class ArrayListUtils {
     public static <T> List<T> handleReplace(List<T> list , RunReplace runReplace){
         ArrayList<T> arrayList = new ArrayList<>();
         for (T t : list){
-            arrayList.add(runReplace.run(t));
+           // arrayList.add(runReplace.run(t));
         }
         return arrayList;
     }

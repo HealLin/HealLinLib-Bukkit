@@ -27,12 +27,15 @@ public class ServerPlugin {
     protected SimplePluginManager pluginManager;
     protected HealLinConfig healLinConfig;
     protected Log log;
-    private HealLinPlugin healLinPlugin;
+    private HealLinPlugin javaPlugin;
 
 
     public ServerPlugin(HealLinPlugin javaPlugin, HealLinCatServer server) {
-        this.healLinPlugin = javaPlugin;
+        this.javaPlugin = javaPlugin;
         this.server = server;
+    }
+
+    public boolean ini(){
         this.craftServer = (CraftServer) Bukkit.getServer();
         this.minecraftServer = this.craftServer.getServer();
         this.pluginManager = (SimplePluginManager) this.craftServer.getPluginManager();
@@ -44,19 +47,22 @@ public class ServerPlugin {
         if (javaPlugin.isConfig()){
             healLinConfig.ini();
         }
+        return true;
     }
+
+
 
     public HealLinForge getHealLinForge() {
         return healLinForge;
     }
 
     public HealLinPlugin getHealLinPlugin() {
-        return healLinPlugin;
+        return javaPlugin;
     }
 
     @Deprecated
     public Player getPlayer(EntityPlayerMP playerMP){
-        return Bukkit.getPlayer(playerMP.func_110124_au());
+        return Bukkit.getPlayer(playerMP.getUniqueID());
     }
 
     public Optional<Player> getPlayer(String playerName){

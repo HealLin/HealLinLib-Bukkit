@@ -184,28 +184,35 @@ public class HealLinConfig {
     }
 
     private static Object getConfig(String path , FileConfiguration config , Class type , boolean isTitle , String title , boolean replace){
-        if (type.equals(String.class)){
-            if (isTitle){
-                if (replace){
-                    return title + config.getString(path , "").replace("&" , "§");
+        try {
+            if (type.equals(String.class)){
+                if (isTitle){
+                    if (replace){
+                        return title + config.getString(path , "").replace("&" , "§");
+                    }
+                    return title + config.getString(path , "");
                 }
-                return title + config.getString(path , "");
+                if (replace){
+                    return config.getString(path , "").replace("&" , "§");
+                }
+                return config.getString(path , "");
+            }else if (type.equals(int.class)){
+                return config.getInt(path , 0);
+            }else if (type.equals(boolean.class)){
+                return config.getBoolean(path , false);
+            }else if (type.equals(List.class)){
+                ArrayList<String> arrayList = new ArrayList<>();
+                config.getStringList(path).forEach((l) ->{
+                    arrayList.add(l.replace("&" , "§"));
+                });
+                return arrayList;
+            }else{
+                return null;
             }
-            if (replace){
-                return config.getString(path , "").replace("&" , "§");
-            }
-            return config.getString(path , "");
-        }else if (type.equals(int.class)){
-            return config.getInt(path , 0);
-        }else if (type.equals(boolean.class)){
-            return config.getBoolean(path , false);
-        }else if (type.equals(List.class)){
-            ArrayList<String> arrayList = new ArrayList<>();
-            config.getStringList(path).forEach((l) ->{
-                arrayList.add(l.replace("&" , "§"));
-            });
-            return arrayList;
-        }else{
+        }catch (NullPointerException e){
+            System.out.println("问题字段" + path);
+            System.out.println("问题类型" + type.getName());
+            e.printStackTrace();
             return null;
         }
     }

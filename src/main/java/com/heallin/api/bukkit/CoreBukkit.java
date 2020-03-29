@@ -1,7 +1,9 @@
 package com.heallin.api.bukkit;
 
 import com.heallin.api.bukkit.entitiy.CorePlayer;
+import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.plugin.HealLinPlugin;
+import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -10,7 +12,7 @@ public class CoreBukkit {
 
     private static Core core;
 
-    public CoreBukkit(HealLinPlugin healLinPlugin){
+    public CoreBukkit(HealLinCatServer healLinPlugin){
         if (core == null){
             core = new Core(healLinPlugin);
         }
@@ -35,6 +37,15 @@ public class CoreBukkit {
     public static CoreServer getServer(){
         return core;
     }
+
+    public static boolean isOnline(CorePlayer corePlayer){
+        return corePlayer.isOnline();
+    }
+
+    public static CraftServer getCraftServer(){
+        return core.getCraftServer();
+    }
+
 
 
 

@@ -8,6 +8,7 @@ import net.minecraft.server.v1_12_R1.Packet;
 import org.bukkit.World;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.Permission;
 
 public interface CorePlayer extends CorePublicPlayer{
 
@@ -26,6 +27,15 @@ public interface CorePlayer extends CorePublicPlayer{
     String locationToString();
 
     World getWorld();
+
+    boolean hasPermission(String... args);
+
+    boolean hasPermission(Permission... permissions);
+
+    boolean noPermission(String... args);
+
+    boolean noPermission(Permission... permissions);
+
 
 
 

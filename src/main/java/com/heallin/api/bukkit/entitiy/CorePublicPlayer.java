@@ -26,4 +26,10 @@ public interface CorePublicPlayer {
     void sendAll(Object object);
 
     UUID getUUID();
+
+    CoreInventory getInventory();
+
+    boolean isOnline();
+
+
 }

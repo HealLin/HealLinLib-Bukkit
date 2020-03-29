@@ -20,7 +20,7 @@ import java.util.UUID;
 public class PokemonApi {
 
     public static EntityPixelmon getEntityPixelmon(UUID uuid){
-        Entity entity = FMLCommonHandler.instance().getMinecraftServerInstance().func_175576_a(uuid);
+        Entity entity = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityFromUuid(uuid);
         if (entity instanceof EntityPixelmon){
             return (EntityPixelmon) entity;
         }

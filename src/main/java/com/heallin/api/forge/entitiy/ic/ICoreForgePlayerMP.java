@@ -1,5 +1,6 @@
 package com.heallin.api.forge.entitiy.ic;
 
+import com.heallin.api.bukkit.entitiy.CoreInventory;
 import com.heallin.api.bukkit.entitiy.ic.ICorePlayer;
 import com.heallin.api.forge.entitiy.CoreForgePlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,7 +20,7 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
     public ICoreForgePlayerMP(ICorePlayer corePlayer){
         this.corePlayer = corePlayer;
-        this.playerMP = FMLCommonHandler.instance().getMinecraftServerInstance().func_184103_al().func_177451_a(corePlayer.getUUID());
+        this.playerMP = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(corePlayer.getUUID());
     }
 
     /*@Override
@@ -39,7 +40,7 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
     @Override
     public void addItemStack(ItemStack itemStack) {
-
+       // this.playerMP.is
     }
 
     @Override
@@ -55,7 +56,7 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
     @Override
     public String getName() {
-        return this.playerMP.func_70005_c_();
+        return this.playerMP.getName();
     }
 
     @Override
@@ -71,12 +72,23 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
     @Override
     public UUID getUUID() {
-        return this.playerMP.func_110124_au();
+        return this.playerMP.getUniqueID();
+    }
+
+    @Override
+    public CoreInventory getInventory() {
+        return null;
+        //return this.playerMP.openGuiHorseInventory();
+    }
+
+    @Override
+    public boolean isOnline() {
+        return false;
     }
 
     @Override
     public World getWorld() {
-        return this.playerMP.field_70170_p;
+        return this.playerMP.getServerWorld();
     }
 
     @Override

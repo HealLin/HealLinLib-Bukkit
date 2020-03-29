@@ -2,7 +2,10 @@ package com.heallin.api.forge;
 
 import com.heallin.api.bukkit.Core;
 import com.heallin.api.bukkit.entitiy.CorePlayer;
+import com.heallin.api.forge.entitiy.CoreForgePlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import org.bukkit.command.Command;
 
 import java.util.UUID;
 
@@ -14,8 +17,8 @@ public class CoreForge{
         CoreForge.core = core;
     }
 
-    public static CorePlayer getCorePlayer(EntityPlayerMP playerMP){
-        return core.getCorePlayer(playerMP.func_110124_au());
+    public static CorePlayer getCorePlayer(EntityPlayer player){
+        return core.getCorePlayer(player.getUniqueID());
     }
 
     @Deprecated
@@ -27,4 +30,9 @@ public class CoreForge{
     public static CorePlayer getCorePlayer(String name){
         return core.getCorePlayer(name);
     }
+
+    public static boolean isOnline(CoreForgePlayerMP playerMP){
+        return playerMP.isOnline();
+    }
+
 }

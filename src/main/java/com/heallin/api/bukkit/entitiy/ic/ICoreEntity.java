@@ -3,6 +3,7 @@ package com.heallin.api.bukkit.entitiy.ic;
 import com.heallin.api.bukkit.entitiy.CoreEntity;
 import lombok.Getter;
 import net.minecraft.server.v1_12_R1.Entity;
+import net.minecraft.server.v1_12_R1.EntityHuman;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 
 import java.util.UUID;
@@ -21,7 +22,7 @@ public class ICoreEntity implements CoreEntity {
 
     @Override
     public String getName() {
-        return this.entity.getName();
+        return ((EntityHuman)this.entity).getName();
     }
 
     @Override

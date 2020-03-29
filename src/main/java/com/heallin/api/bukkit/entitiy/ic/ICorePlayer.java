@@ -13,10 +13,12 @@ import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftInventoryPlayer;
 import org.bukkit.craftbukkit.v1_12_R1.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.Permission;
 
 public class ICorePlayer extends ICoreEntity implements CorePlayer {
 
@@ -50,6 +52,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
             this.playerMP = new ICoreForgePlayerMP(this);
         }
         this.world = this.entityPlayer.world;
+        this.inventory = new ICoreInventory(this , (CraftInventoryPlayer)player.getInventory());
     }
 
     @Override
@@ -107,10 +110,61 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
     }
 
     @Override
+    public boolean hasPermission(String... args) {
+        for (String p : args){
+            if (!this.player.hasPermission(p)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean hasPermission(Permission... permissions) {
+        for (Permission p : permissions){
+            if (!this.player.hasPermission(p)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean noPermission(String... args) {
+        for (String p : args){
+            if (this.player.hasPermission(p)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean noPermission(Permission... permissions) {
+        for (Permission p : permissions){
+            if (this.player.hasPermission(p)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isOnline() {
+        return this.player.isOnline();
+    }
+
+
+    @Override
     public void sendAll(Object packet) {
         for (CorePlayer p : CoreBukkit.getOnlinePlayers()){
             p.send((Packet<?>) packet);
         }
+    }
+
+    @Override
+    public CoreInventory getInventory() {
+        return null;
     }
 
     @Override
@@ -125,8 +179,10 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
 
     @Override
     public void openInventory(Inventory inventory) {
-
+        this.player.openInventory(inventory);
     }
+
+
 
     @Override
     public CoreForgePlayerMP getCoreForgePlayerMP() {
@@ -135,7 +191,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
 
     @Override
     public String locationToString() {
-        return null;
+        return this.location.toString();
     }
 
 

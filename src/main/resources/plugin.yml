@@ -1,4 +1,7 @@
 name: HealLinCatServer
 main: com.zeyilinxin.heallinlib.HealLinCatServer
-version: 1.2
+version: @version@
 author: 择忆霖心
+prefix: 择忆霖心前置插件
+description: 择忆霖心前置插件工具包
+website: sp.heallin.cn

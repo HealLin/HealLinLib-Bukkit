@@ -16,23 +16,23 @@ public class HealLinCatServer extends HealLinPlugin {
     public CoreBukkit coreBukkit;
 
     @Override
-    public void onEnable() {
+    public void onStart() {
+        this.info("开始加载....");
         healLinCatServer = this;
         coreBukkit = new CoreBukkit(this);
         this.healLinPluginManager = new HealLinPluginManager(this);
+        this.info("插件管理器加载成功!");
         this.info("加载完成");
     }
 
     @Override
-    public void onDisable() {
+    public void onEnd() {
         this.healLinPluginManager.onDisable();
     }
 
-    public <T> T ini(HealLinPlugin javaPlugin) {
-        ServerPlugin serverPlugin = new ServerPlugin(javaPlugin , this);
-        javaPlugin.setServerPlugin(serverPlugin);
-        this.healLinPluginManager.add(javaPlugin.getPluginName() , javaPlugin);
-        return (T) serverPlugin;
+
+    public void ini(ServerPlugin serverPlugin) {
+        this.healLinPluginManager.add(serverPlugin.getHealLinPlugin().getPluginName() , serverPlugin.getHealLinPlugin());
     }
 
     public static HealLinCatServer instance(){

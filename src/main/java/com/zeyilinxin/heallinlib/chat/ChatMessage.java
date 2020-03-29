@@ -5,15 +5,19 @@
 
 package com.zeyilinxin.heallinlib.chat;
 
+import lombok.Getter;
 import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatMessage {
+
+public class ChatMessage implements CoreChatMessage{
     private int point;
     private ArrayList<Unit> units = new ArrayList();
+    @Getter
     private String json;
+
 
     public ChatMessage(String message) {
         this.units.add(new Unit(message));

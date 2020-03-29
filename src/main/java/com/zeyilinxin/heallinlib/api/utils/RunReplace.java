@@ -5,14 +5,13 @@ package com.zeyilinxin.heallinlib.api.utils;
  * @version 1.0
  * @date 2020/3/21 19:19
  */
-public interface RunReplace {
+public interface RunReplace<T> {
 
 
     /**
      * 处理替换的数据
      * @param t 需要处理的数据
-     * @param <T>
      * @return 返回处理好的数据
      */
-    <T> T run(T t);
+     T run(T t);
 }

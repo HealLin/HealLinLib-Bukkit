@@ -27,7 +27,7 @@ public class HealLinForge {
     }
 
     public static EntityPlayerMP getEntityPlayerMP(Player player){
-        return forge.minecraftServer.func_184103_al().func_177451_a(player.getUniqueId());
+        return forge.minecraftServer.getPlayerList().getPlayerByUUID(player.getUniqueId());
     }
 
 

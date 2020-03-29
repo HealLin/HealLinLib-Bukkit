@@ -9,6 +9,6 @@ public class NetItemStackUtils {
 
     public static ItemStack netToOrg(net.minecraft.item.ItemStack itemStack){
         return CraftItemStack.asBukkitCopy(new net.minecraft.server.v1_12_R1.ItemStack(
-                NetAndOrgNBTUtils.netToOrg(itemStack.func_77955_b(new NBTTagCompound()))));
+                NetAndOrgNBTUtils.netToOrg(itemStack.writeToNBT(new NBTTagCompound()))));
     }
 }

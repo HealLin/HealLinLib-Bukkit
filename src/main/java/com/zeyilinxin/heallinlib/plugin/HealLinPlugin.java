@@ -3,6 +3,7 @@ package com.zeyilinxin.heallinlib.plugin;
 import com.heallin.api.bukkit.CoreBukkit;
 import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.command.CommandHelp;
+import com.zeyilinxin.heallinlib.command.CoreCommand;
 import com.zeyilinxin.heallinlib.command.HealLinCommand;
 import com.zeyilinxin.heallinlib.config.HealLinConfig;
 import com.zeyilinxin.heallinlib.storage.HealLinStorage;
@@ -18,7 +19,23 @@ public abstract class HealLinPlugin extends JavaPlugin {
 
     private ServerPlugin serverPlugin;
 
-    public abstract String getPluginName();
+    public HealLinPlugin(){
+
+    }
+
+    @Override
+    public void onDisable() {
+        this.onEnd();
+    }
+
+    @Override
+    public void onEnable() {
+        this.onStart();
+    }
+
+    public abstract void onStart();
+
+    public abstract void onEnd();
 
     @Deprecated
     public boolean isForge(){
@@ -43,7 +60,13 @@ public abstract class HealLinPlugin extends JavaPlugin {
     }
 
     public void ini(){
-        HealLinCatServer.instance().ini(this);
+        ServerPlugin serverPlugin = new ServerPlugin(this , HealLinCatServer.instance());
+        this.setServerPlugin(serverPlugin);
+        HealLinCatServer.instance().ini(serverPlugin);
+        if (serverPlugin.ini() == false){
+            throw new NullPointerException("初始化异常");
+        }
+        return ;
     }
 
     @Override
@@ -70,6 +93,12 @@ public abstract class HealLinPlugin extends JavaPlugin {
         this.getCommand(main).setExecutor(healLinCommand);
     }
 
+    public <T> T iniCommand(String name , T cmd , CommandHelp help , String title){
+        CoreCommand<T> coreCommand = new CoreCommand(name , this , cmd , help , title);
+        CoreBukkit.getServer().addCommand(this.getName() , coreCommand);
+        return cmd;
+    }
+
     @Deprecated
     public EntityPlayerMP getEntityPlayerMP(Player player){
         return CoreBukkit.getCorePlayer(player).getEntityPlayerMP();
@@ -90,5 +119,7 @@ public abstract class HealLinPlugin extends JavaPlugin {
     @Deprecated
     public void registerPlayerConfig(){
     }
+
+    public abstract String getPluginName();
 
 }
