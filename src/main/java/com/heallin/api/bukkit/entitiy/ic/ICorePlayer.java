@@ -154,6 +154,11 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
         return this.player.isOnline();
     }
 
+    @Override
+    public void sendTitle(String title, String show) {
+        this.player.sendTitle(title , show);
+    }
+
 
     @Override
     public void sendAll(Object packet) {
@@ -193,6 +198,7 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
     public String locationToString() {
         return this.location.toString();
     }
+
 
 
 }

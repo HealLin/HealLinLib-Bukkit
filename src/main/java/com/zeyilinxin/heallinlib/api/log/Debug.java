@@ -28,7 +28,7 @@ public class Debug {
         PrintWriter fileWriter = null;
         try {
             fileWriter = new PrintWriter(new FileWriter(file, true));
-            fileWriter.println("[DEBUG]:" + TimeApi.getTime() + data);
+            fileWriter.println("[DEBUG]:" + TimeApi.getTime("") + data);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {

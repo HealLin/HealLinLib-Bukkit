@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import static org.bukkit.event.EventPriority.LOWEST;
 import static org.bukkit.event.EventPriority.MONITOR;
 
 public class CoreServerListener implements Listener {
@@ -16,12 +17,12 @@ public class CoreServerListener implements Listener {
         this.core =  core;
     }
 
-    @EventHandler(priority = MONITOR)
+    @EventHandler(priority = LOWEST)
     public void onJoin(PlayerJoinEvent event){
         this.core.getPlayerManager().onJoin(event.getPlayer());
     }
 
-    @EventHandler(priority = MONITOR)
+    @EventHandler(priority = LOWEST)
     public void onQuit(PlayerQuitEvent event){
         this.core.getPlayerManager().onQuit(event.getPlayer());
     }

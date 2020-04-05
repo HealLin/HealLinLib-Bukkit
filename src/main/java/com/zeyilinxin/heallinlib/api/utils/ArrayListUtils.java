@@ -23,10 +23,12 @@ public class ArrayListUtils {
 
     }
 
+    //从小到大排序
     public static <T> T[] fromSmallToLarge(T[] cls , FSTL<T> sfl){
         for (T l : cls){
             for(int i = 0 ; i < cls.length - 1 ; i++){
                 T temp;
+                //当[i]>[i+1]
                 if (sfl.run(cls , i)){
                     temp = cls[i];
                     cls[i] = cls[i+1];

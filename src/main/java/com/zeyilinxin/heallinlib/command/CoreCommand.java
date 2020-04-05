@@ -103,6 +103,8 @@ public class CoreCommand<T> extends Command {
         return "";
     }
 
+
+
     boolean isArgs(String[] setCmds, String[] nowCmds){
         if (setCmds.length == 0){
             return true;

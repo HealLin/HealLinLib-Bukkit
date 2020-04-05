@@ -67,7 +67,6 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
 
     @Override
     public void sendAll(Object object) {
-
     }
 
     @Override
@@ -84,6 +83,11 @@ public class ICoreForgePlayerMP implements CoreForgePlayerMP {
     @Override
     public boolean isOnline() {
         return false;
+    }
+
+    @Override
+    public void sendTitle(String title, String show) {
+
     }
 
     @Override

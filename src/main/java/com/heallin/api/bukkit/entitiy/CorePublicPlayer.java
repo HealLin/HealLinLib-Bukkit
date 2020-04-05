@@ -31,5 +31,5 @@ public interface CorePublicPlayer {
 
     boolean isOnline();
 
-
+    void sendTitle(String title , String show);
 }

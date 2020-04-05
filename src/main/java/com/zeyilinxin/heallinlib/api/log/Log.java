@@ -41,7 +41,7 @@ public class Log {
         PrintWriter fileWriter = null;
         try {
             fileWriter = new PrintWriter(new FileWriter(file, true));
-            fileWriter.println("[Info]:" + TimeApi.getTime() + data);
+            fileWriter.println("[Info]:" + TimeApi.getTime("") + data);
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
