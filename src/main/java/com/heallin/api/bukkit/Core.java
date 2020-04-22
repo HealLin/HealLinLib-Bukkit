@@ -92,6 +92,11 @@ public final class Core implements CoreServer{
     }
 
     @Override
+    public CorePlayer[] getWorldPlayers(String worldName) {
+        return this.playerManager.getWorldPlayers(worldName);
+    }
+
+    @Override
     public CoreEventManager getEventManager() {
         return this.eventManager;
     }

@@ -20,7 +20,7 @@ public enum  CommandType {
     public static String getName(CommandType commandType){
         switch (commandType){
             case Player:
-            case Sender: {
+            case CorePlayer: {
                 return "玩家";
             }
             default:{

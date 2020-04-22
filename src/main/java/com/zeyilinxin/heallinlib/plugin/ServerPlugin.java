@@ -2,6 +2,7 @@ package com.zeyilinxin.heallinlib.plugin;
 
 import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.api.log.Log;
+import com.zeyilinxin.heallinlib.config.CoreLinConfig;
 import com.zeyilinxin.heallinlib.config.HealLinConfig;
 import com.zeyilinxin.heallinlib.forge.HealLinForge;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,6 +27,7 @@ public class ServerPlugin {
     protected MinecraftServer minecraftServer;
     protected SimplePluginManager pluginManager;
     protected HealLinConfig healLinConfig;
+    protected CoreLinConfig coreLinConfig;
     protected Log log;
     private HealLinPlugin javaPlugin;
 
@@ -39,13 +41,13 @@ public class ServerPlugin {
         this.craftServer = (CraftServer) Bukkit.getServer();
         this.minecraftServer = this.craftServer.getServer();
         this.pluginManager = (SimplePluginManager) this.craftServer.getPluginManager();
-        this.healLinConfig = new HealLinConfig(server , javaPlugin);
-        log = new Log(this , healLinConfig.getDirectoryFile());
+        this.coreLinConfig = new CoreLinConfig(server , javaPlugin);
+        log = new Log(this , coreLinConfig.getDirectoryFile());
         if (javaPlugin.isForge()){
             this.healLinForge = new HealLinForge(server);
         }
         if (javaPlugin.isConfig()){
-            healLinConfig.ini();
+            coreLinConfig.ini();
         }
         return true;
     }
@@ -113,6 +115,10 @@ public class ServerPlugin {
 
     public HealLinConfig getHealLinConfig() {
         return healLinConfig;
+    }
+
+    public CoreLinConfig getCoreLinConfig(){
+        return coreLinConfig;
     }
 
     public void sendActionBar(Player player , String message){

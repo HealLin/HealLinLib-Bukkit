@@ -5,6 +5,7 @@ import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.command.CommandHelp;
 import com.zeyilinxin.heallinlib.command.CoreCommand;
 import com.zeyilinxin.heallinlib.command.HealLinCommand;
+import com.zeyilinxin.heallinlib.config.CoreLinConfig;
 import com.zeyilinxin.heallinlib.config.HealLinConfig;
 import com.zeyilinxin.heallinlib.storage.HealLinStorage;
 import com.zeyilinxin.heallinlib.storage.Storage;
@@ -71,21 +72,26 @@ public abstract class HealLinPlugin extends JavaPlugin {
 
     @Override
     public FileConfiguration getConfig() {
-        return this.getPluginConfig().getConfiguration();
+        return this.getCoreLinConfig().getConfiguration();
     }
 
     @Override
     public void reloadConfig() {
-        this.getPluginConfig().reload();
+        this.getCoreLinConfig().reload();
     }
 
     @Override
     public void saveConfig() {
-        this.getPluginConfig().save();
+        this.getCoreLinConfig().save();
     }
 
+    @Deprecated
     public HealLinConfig getPluginConfig(){
         return this.getServerPlugin().healLinConfig;
+    }
+
+    public CoreLinConfig getCoreLinConfig(){
+        return this.getServerPlugin().coreLinConfig;
     }
 
     public <T> void iniCmd(String main , T cmd , CommandHelp commandHelp , String title){
@@ -113,7 +119,7 @@ public abstract class HealLinPlugin extends JavaPlugin {
     }
 
     protected void copyFile(String path , boolean replace){
-        this.serverPlugin.getHealLinConfig().saveResource(path , replace);
+        this.serverPlugin.getCoreLinConfig().saveResource(path , replace);
     }
 
     @Deprecated

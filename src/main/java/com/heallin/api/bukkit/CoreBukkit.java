@@ -46,6 +46,10 @@ public class CoreBukkit {
         return core.getCraftServer();
     }
 
+    public static CorePlayer[] getWorldPlayers(String worldName){
+        return core.getWorldPlayers(worldName);
+    }
+
 
 
 

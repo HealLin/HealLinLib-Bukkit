@@ -47,6 +47,26 @@ public class CoreCommand<T> extends Command {
         this.cmd =  cmd;
     }
 
+    public CoreCommand(String name, T cmd, CommandHelp help, String title) {
+        super(name);
+        this.title = title;
+        Method[] methods = cmd.getClass().getDeclaredMethods();
+        try {
+            for (Method m : methods){
+                m.setAccessible(true);
+                if (m.isAnnotationPresent(HCD.class)){
+                    HCD hgc = m.getAnnotation(HCD.class);
+                    this.cmdMap.put(hgc , m);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.commandHelp = help;
+        this.cmd =  cmd;
+    }
+
     @Override
     public boolean execute(CommandSender sender, String s, String[] args) {
         for (HCD h : this.cmdMap.keySet()){

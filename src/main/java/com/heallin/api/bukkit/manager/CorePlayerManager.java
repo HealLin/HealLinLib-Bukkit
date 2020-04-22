@@ -5,8 +5,10 @@ import com.heallin.api.bukkit.entitiy.ic.ICorePlayer;
 import com.heallin.api.bukkit.Core;
 import com.heallin.api.bukkit.entitiy.CorePlayer;
 import com.zeyilinxin.heallinlib.api.utils.ArrayListUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -52,5 +54,13 @@ public class CorePlayerManager {
 
     public CorePlayer[] getOnlinePlayers(){
         return ArrayListUtils.listToArray(this.playerMap.values() , CorePlayer.class);
+    }
+
+    public CorePlayer[] getWorldPlayers(String worldName){
+        ArrayList<CorePlayer> arrayList = new ArrayList<>();
+        Bukkit.getWorld(worldName).getPlayers().forEach((i)->{
+            arrayList.add(this.playerMap.get(i));
+        });
+        return ArrayListUtils.listToArray(arrayList , CorePlayer.class);
     }
 }

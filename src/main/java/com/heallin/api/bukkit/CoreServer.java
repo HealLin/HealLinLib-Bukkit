@@ -47,6 +47,13 @@ public interface CoreServer {
     MinecraftBukkitApi getMinecraftBukkitApi();
 
     /**
+     * 获取这个世界的所有玩家
+     * @param worldName 世界名城
+     * @return 在这个世界所有玩家
+     */
+    CorePlayer[] getWorldPlayers(String worldName);
+
+    /**
      * 获取事件管理器
      * @return
      */

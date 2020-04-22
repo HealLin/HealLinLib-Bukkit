@@ -12,7 +12,7 @@ public class PlayerConfigManager {
 
     public PlayerConfigManager(HealLinPlugin plugin){
         this.plugin = plugin;
-        dataFolder = new File(plugin.getServerPlugin().getHealLinConfig().getDirectoryFile() + File.separator + "玩家数据");
+        dataFolder = new File(plugin.getServerPlugin().getCoreLinConfig().getDirectoryFile() + File.separator + "玩家数据");
         if (!dataFolder.exists()){
             dataFolder.mkdirs();
         }
