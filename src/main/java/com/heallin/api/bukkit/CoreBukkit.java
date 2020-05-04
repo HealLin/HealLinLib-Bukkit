@@ -1,21 +1,28 @@
 package com.heallin.api.bukkit;
 
 import com.heallin.api.bukkit.entitiy.CorePlayer;
+import com.heallin.api.bukkit.file.YamlManager;
 import com.zeyilinxin.heallinlib.HealLinCatServer;
 import com.zeyilinxin.heallinlib.plugin.HealLinPlugin;
 import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.entity.Player;
 
+import java.io.File;
 import java.util.UUID;
 
 public class CoreBukkit {
 
     private static Core core;
+    private static HealLinCatServer catServer = HealLinCatServer.instance();
 
     public CoreBukkit(HealLinCatServer healLinPlugin){
         if (core == null){
             core = new Core(healLinPlugin);
         }
+    }
+
+    public static int getVersion(){
+        return catServer.getVersion();
     }
 
     public static CorePlayer getCorePlayer(UUID uuid){
@@ -49,6 +56,12 @@ public class CoreBukkit {
     public static CorePlayer[] getWorldPlayers(String worldName){
         return core.getWorldPlayers(worldName);
     }
+
+    public static YamlManager getYaml(File file){
+        return YamlManager.getInstance(file);
+    }
+
+
 
 
 

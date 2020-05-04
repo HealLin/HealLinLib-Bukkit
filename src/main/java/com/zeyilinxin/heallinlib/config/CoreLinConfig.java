@@ -192,6 +192,8 @@ public class CoreLinConfig {
                         arrayList.add(l.replace("&" , "§"));
                     });
                     return arrayList;
+                }else if (type.equals(double.class)){
+                    return config.getDouble(path , 0);
                 }else{
                     return null;
                 }

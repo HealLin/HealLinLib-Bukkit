@@ -7,6 +7,7 @@ import com.heallin.api.bukkit.entitiy.CorePlayer;
 import com.heallin.api.bukkit.version.MinecraftBukkitApi;
 import com.heallin.api.forge.entitiy.CoreForgePlayerMP;
 import com.heallin.api.forge.entitiy.ic.ICoreForgePlayerMP;
+import io.netty.channel.Channel;
 import lombok.Getter;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.v1_12_R1.*;
@@ -147,6 +148,16 @@ public class ICorePlayer extends ICoreEntity implements CorePlayer {
             }
         }
         return true;
+    }
+
+    @Override
+    public NetworkManager getNetworkManager() {
+        return this.playerConnection.networkManager;
+    }
+
+    @Override
+    public Channel getChannel() {
+        return this.getNetworkManager().channel;
     }
 
     @Override
