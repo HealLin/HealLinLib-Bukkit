@@ -1,5 +1,5 @@
-name: HealLinCatServer
-main: com.zeyilinxin.heallinlib.HealLinCatServer
+name: CoreLib
+main: com.corelin.library.CoreLib
 version: @version@
 author: 择忆霖心
 prefix: 择忆霖心前置插件

@@ -1,0 +1,48 @@
+版本: 2.001
+增加了配置文件的intList的文件读取功能
+版本: 2.0
+重写部分代码,将前置改名为CoreLib
+和旧版本的不冲突，为了兼容旧版本可以不删除旧版本
+增加了模块化处理，为了方便其他版本例如：
+1.12.2-水龙
+1.12.2-猫端
+中的版本区分！其中模块化会自动加载到jvm
+加载会根据服务器的版本和模块的启用版本以及前置版本
+来自动加载所需的模块来让前置插件运行
+增加了Okhttp3的支持，将本插件作为一个前置插件
+和一个依赖库的存在，用来方便Bukkit的插件开发
+其中又更加兼容的增加了对于CatServer的支持
+以下旧版本的HealLinServer的更新日志
+版本: 1.426
+增加了选中物品框的调整功能
+版本: 1.425
+增加了对方块检测的支持，以放置方块为核心
+版本: 1.424
+增加了CoreFileUtils对类File的更多操作拓展封装
+修复了一些BUG
+优化了一些代码
+挤牙膏更新
+版本: 1.423
+增加了不使用注解来执行没有权限的提示，使得提示更加自定义
+版本: 1.422
+集成了Bukkit创建Gui的内容：CoreLinGuiUtils
+让创建Gui更方便
+版本: 1.421
+修复了CorePlayer获取世界不更新的BUG
+版本: 1.42-beta
+时间:2020年5月13日 18:00
+内容:
+更新了自己的事件系统
+修改了部分储存模块
+修改了日志储存还有Debug储存
+当前为测试版本
+版本：1.4123
+时间2020年5月5日  23:50
+内容:
+更新了从Bukkit的List<Player>转变List<CorePlayer>
+使用CoreBukkit.playerToCorePlayer
+更新了从Bukkit的List<Player>改变成List<EntityPlayerMP>
+使用CoreBukkit.playerToEntityPlayerMP
+更新了从HealLinLib的List<CorePlayer>转变成List<EntityPlayerMP>
+使用CoreBukkit.corePlayerToEntityPlayerMP
+
