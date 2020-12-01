@@ -23,6 +23,8 @@ public class CoreLibSecurityManager extends SecurityManager{
         String permissionName = permission.getName() != null ? permission.getName() : "missing";
         if ("setSecurityManager".equals(permissionName)) {
             throw new SecurityException("无法替换CoreLib安全管理器");
+        }else if ("setIO".equals(permissionName)){
+            throw new SecurityException("无法替换IO控制台输出");
         }
         return;
     }
