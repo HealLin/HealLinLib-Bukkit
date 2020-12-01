@@ -2,13 +2,15 @@ package com.corelin.library;
 
 
 import com.corelin.library.api.CoreLibApi;
-import com.corelin.library.api.event.CoreLibEvent;
 import com.corelin.library.api.event.manager.CoreLibEventManager;
+
 import com.corelin.library.module.CoreLibModuleManager;
 import com.corelin.library.module.basis.CoreLibServer;
 import com.corelin.library.module.basis.CoreLinBasis;
 import com.corelin.library.plugin.CoreLibPluginManager;
 import com.corelin.library.plugin.CoreLinPlugin;
+import com.corelin.library.system.CoreLibSecurityManager;
+import com.corelin.library.system.CoreLinSystem;
 import lombok.Getter;
 
 
@@ -47,9 +49,36 @@ public class CoreLib extends CoreLinPlugin {
     @Getter
     private CoreLinBasis basis;
 
+    @Getter
+    private CoreLinSystem linSystem;
+
+    public CoreLib(){
+        this.info("开始加载-初始化基本服务....");
+        this.linSystem = new CoreLinSystem(this);
+        try{
+            System.setSecurityManager(new CoreLibSecurityManager(this));
+            this.info("注册安全器成功！");
+        }catch (SecurityException e){
+            this.info("CoreLib无法替换安全管理器，请检测是否有其他插件注册");
+        }
+    /*    PipedInputStream pipedInputStream = new PipedInputStream();
+        PipedOutputStream pipedOutputStream = new PipedOutputStream();
+        try {
+            pipedOutputStream.connect(pipedInputStream);
+        }
+        catch(IOException e) {
+            System.err.println("连接失败");
+            System.exit(1);
+        }
+        PrintStream ps = new PrintStream(pipedOutputStream);
+        System.setOut(ps);
+        System.setErr(ps);
+        ps.println("a");*/
+
+    }
+
     @Override
     public void onLoad() {
-        this.info("初始化基础服务....");
         this.api = new CoreLibApi(this);
         this.libServer = new CoreLibServer(this);
         this.basis = new CoreLinBasis(this);
